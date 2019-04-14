@@ -83,9 +83,9 @@ it('can add the star name and star symbol properly', async() => {
     let starId = 6;
     lastStarId = starId;
     let starName = 'star 6';
-    await  starNotary.createStar(starName, starId, {from: user1});
+    await  starNotary.createStar('test star', starId, {from: user1});
     //2. Call the name and symbol properties in your Smart Contract and compare with the name and symbol provided
-    assert.equal(await starNotary.name.call(), starName);
+    assert.equal(await starNotary.name.call(), 'Star Token');
     assert.equal(await starNotary.symbol.call(), 'STT');
 });
 
@@ -122,7 +122,7 @@ it('lets a user transfer a star', async() => {
     let user2 = accounts[2];
     await starNotary.transferStar(user2, starId1, {from: user1});
     // 3. Verify the star owner changed.
-    assert.equal(await instance.ownerOf(starId1), user2);
+    assert.equal(await starNotary.ownerOf(starId1), user2);
 });
 
 it('lookUptokenIdToStarInfo test', async() => {
